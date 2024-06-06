@@ -65,6 +65,7 @@
                                         <thead>
                                             <tr role="row">
                                                 <th>ID</th>
+                                                <th>Kode Kategori</th>
                                                 <th>Ketegori</th>
                                                 <th>Keterangan</th>
                                                 <th></th>
@@ -75,6 +76,7 @@
                                             ?>
                                                 <tr role="row" class="odd">
                                                     <td><?= $ktg->id; ?></td>
+                                                    <td><?= $ktg->idkat; ?></td>
                                                     <td><?= $ktg->namakateg; ?></td>
                                                     <td><?= $ktg->deskkateg; ?></td>
                                                     <td>
