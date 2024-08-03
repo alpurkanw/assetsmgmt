@@ -154,7 +154,88 @@ class Auth extends CI_Controller
     }
     // public
 
+    public function gantiPass()
+    {
+        $data['judul'] = 'Ubah Password';
+        // $data['method'] = "open_index";
+        $this->load->view('V_chgpass', $data);
+    }
 
+
+    public function gantiPass_Proses()
+    {
+
+
+        // $data['title'] = 'Ganti Password';
+        // $data['user'] = $this->session->userdata('usernm');
+
+
+        $this->form_validation->set_rules('old_password', 'Password Lama', 'required');
+        $this->form_validation->set_rules('new_password', 'Password Baru', 'required');
+        $this->form_validation->set_rules('new_password_confirm', 'Konfirmasi Password Baru', 'required|trim|matches[new_password]');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('Auth/gantiPass', $data);
+        } else {
+            $old_password = $this->input->post('old_password');
+            $new_password = $this->input->post('new_password');
+
+            $usernm =  $this->session->userdata('usernm');
+            $email =  $this->session->userdata('email');
+
+            $this->db->select('A.usernm,A.email, A.nama, A.nip,A.lokid, A.id iduser, A.level, A.pass,  B.namalok');
+            $this->db->from('tbl_user A');
+            $this->db->join('tbl_lok B', 'B.id = A.lokid', 'left');
+            $this->db->where(["usernm" => $usernm]);
+            $this->db->where(["email" => $email]);
+
+            $user = $this->db->get()->row_array();
+
+
+            // print_r($user);
+            // return;
+
+
+
+            // if ($user) {
+            //     if (password_verify($pass, $user["pass"])) {
+
+
+
+
+            // $user = $this->user_model->get_user_by_id($this->session->userdata('id_user'));
+
+            if (password_verify($old_password, $user['pass'])) {
+                echo "boleh ganti pass";
+
+                $data = array(
+                    'pass' => password_hash($new_password, PASSWORD_DEFAULT)
+                );
+
+                $this->db->where(["usernm" => $usernm]);
+                $this->db->where(["email" => $email]);
+                $this->db->update('tbl_user', $data);
+
+
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-success py-1" role="alert">
+                                Password berhasil diubah!
+                            </div>'
+                );
+                redirect('Auth/gantiPass');
+            } else {
+
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-danger py-1" role="alert">
+                                Password Gagal diubah!
+                            </div>'
+                );
+                redirect('Auth/gantiPass');
+            }
+        }
+    }
 
     public function logout()
     {
@@ -169,7 +250,7 @@ class Auth extends CI_Controller
 
         session_destroy();
         // session_destroy();
-        redirect('https://www.home.rsabuhanifah.com/');
+        redirect('Welcome');
     }
 
     public function register()

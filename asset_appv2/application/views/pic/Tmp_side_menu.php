@@ -27,6 +27,15 @@
                     </a>
                 </li> -->
                 <li class="nav-item">
+                    <a href="<?= base_url("pic/uplGambar/barCode") ?>" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Upload Gambar
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="<?= base_url("pic/CcariBar/barCode") ?>" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
@@ -60,6 +69,7 @@
                         </p>
                     </a>
                 </li>
+
 
                 <hr>
                 <li class="nav-item">

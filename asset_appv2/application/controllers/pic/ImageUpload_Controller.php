@@ -15,6 +15,7 @@ class ImageUpload_Controller extends CI_Controller
     {
 
         $kodebar =  $this->input->post('kodebar');
+        $from_page =  $this->input->post('from_page');
         // echo $kodebar;
         // return;
         // return;
@@ -56,8 +57,12 @@ class ImageUpload_Controller extends CI_Controller
             );
         }
 
-        // redirect($redir);
-        redirect('pic/UpdateBar/openFormUpdate/' . $kodebar);
+        if ($from_page == "uploadGambar") {
+            redirect('pic/uplGambar/barCode');
+        } else {
+            redirect('pic/UpdateBar/openFormUpdate/' . $kodebar);
+        }
+
         return;
     }
 }

@@ -42,10 +42,34 @@
                     <div class="col">
                         <div class="card card-info card-outline">
                             <div class="card-header">
-                                <h3 class="card-title"></h3>
+                                <h3 class="card-title">
+                                    Ganti Password
+                                </h3>
                             </div> <!-- /.card-body -->
                             <div class="card-body">
-                                <p class="h3">Selamat Datang <?= $_SESSION["nama"]; ?></p>
+                                <?= $this->session->flashdata('pesan'); ?>
+                                <form action="<?= base_url('Auth/gantiPass_Proses') ?>" method="post">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="old_password">Password Lama:</label>
+                                            <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Masukkan password lama">
+                                            <?php echo form_error('old_password', '<small class="text-danger">', '</small>'); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="new_password">Password Baru:</label>
+                                            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Masukkan password baru (minimal 8 karakter)">
+                                            <?php echo form_error('new_password', '<small class="text-danger">', '</small>'); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="new_password_confirm">Konfirmasi Password Baru:</label>
+                                            <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm" placeholder="Konfirmasi password baru">
+                                            <?php echo form_error('new_password_confirm', '<small class="text-danger">', '</small>'); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Ganti Password</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div><!-- /.card-body -->
                         </div>
 

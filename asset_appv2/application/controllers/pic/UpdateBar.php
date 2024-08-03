@@ -35,12 +35,19 @@ class UpdateBar extends CI_Controller
         $data["judul"] = "List Barang";
         $data["page"] = "response";
 
-        $this->db->select('*');
-        $this->db->from('tbl_barang');
-        $this->db->like('kodebar', $kata, 'both');
-        $this->db->or_like('namabar', $kata, 'both');
 
-        $data["brgs"] = $this->db->get()->result_object();
+
+        // $this->db->select('*');
+        // $this->db->from('tbl_barang');
+        // $this->db->like('kodebar', $kata, 'both');
+        // $this->db->or_like('namabar', $kata, 'both');
+
+        $sql = "SELECT a.kodebar, kode_aset,no_reg_aset, thn_angg,merkbar, namabar, idruang,ruang, harga, kondisi, file_name FROM `tbl_barang` a
+                LEFT JOIN tbl_gambar b on b.kodebar = a.kodebar
+                where a.kodebar like  '%$kata%' or a.namabar like '%$kata%' ";
+        $data["brgs"]  = $this->db->query($sql)->result_object();
+
+        // $data["brgs"] = $this->db->get()->result_object();
 
         $this->load->view('pic/VupdateBar', $data);
     }

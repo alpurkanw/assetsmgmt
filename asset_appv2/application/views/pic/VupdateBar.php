@@ -12,15 +12,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <!-- <link rel="stylesheet" href="<?= base_url("assets/"); ?>ionicons.min.css"> -->
-    <!-- overlayScrollbars -->
-    <!-- <link rel="stylesheet" href="<?= base_url("assets/") ?>dist/css/adminlte.min.css"> -->
-    <!-- DataTables -->
-    <!-- <link rel="stylesheet" -->
-    <!-- href="<?= base_url("assets/") ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
-    <!-- <link rel="stylesheet" -->
-    <!-- href="<?= base_url("assets/") ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>dist/css/adminlte.min.css">
 
     <!-- Google Font: Source Sans Pro -->
 </head>
@@ -87,7 +85,7 @@
                                 <div class="card-body p-2">
                                     <!-- <button class="btn btn-info btn_export">tes</button> -->
                                     <div class="tes_data">
-                                        <table id="list_lap_bar" class="table table-sm table-bordered table-striped table-responsive " role="grid" aria-describedby="example1_info">
+                                        <table id="list_lap_bar" class="table table-sm table-striped">
                                             <thead>
                                                 <tr role="row">
                                                     <th>No</th>
@@ -97,39 +95,46 @@
                                                     <th>Tahun Angg.</th>
                                                     <th>Harga</th>
                                                     <th>Status Kondisi</th>
+                                                    <th>Gambar</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                 $no = 1;
-                                                foreach ($brgs as $key => $lok) {
+                                                // print_r($brgs);
+                                                foreach ($brgs as $key => $bar) {
 
                                                 ?>
                                                     <tr role="row" class="odd">
                                                         <td><?= $no; ?></td>
-                                                        <td><?= $lok->kodebar; ?></td>
-                                                        <td><?= $lok->idruang . '-' . $lok->ruang; ?></td>
-                                                        <td><?= $lok->namabar . '/' . $lok->merkbar; ?></td>
-                                                        <td><?= $lok->thn_angg; ?></td>
-                                                        <td>Rp <?= number_format($lok->harga, 2); ?></td>
-                                                        <td><?= $lok->kondisi; ?></td>
+                                                        <td><?= $bar->kodebar; ?></td>
+                                                        <td><?= $bar->idruang . '-' . $bar->ruang; ?></td>
+                                                        <td><?= $bar->namabar . '/' . $bar->merkbar; ?></td>
+                                                        <td><?= $bar->thn_angg; ?></td>
+                                                        <td>Rp <?= number_format($bar->harga, 2); ?></td>
+                                                        <td><?= $bar->kondisi; ?></td>
+                                                        <td>
+                                                            <?php
+                                                            if ($bar->file_name !== null) { ?>
+                                                                <img class="img img-size-50" src="<?= base_url("assets/image/img_bar/") . $bar->file_name; ?>" height="100" width="100" alt=""><br>
+                                                            <?php
+                                                                echo $bar->file_name;
+                                                            } ?>
+                                                        </td>
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col mb-2">
                                                                     <form action=" <?= base_url("pic/UpdateBar/updBarOpenForm/"); ?>" method="post">
-                                                                        <input type="hidden" name="kodebar" value="<?= $lok->kodebar; ?>">
+                                                                        <input type="hidden" name="kodebar" value="<?= $bar->kodebar; ?>">
                                                                         <input type="hidden" name="katakunci" value="<?= $_SESSION["katakunci"]; ?>">
                                                                         <button type="submit" class="btn btn-sm btn-primary">Update</button>
                                                                     </form>
                                                                 </div>
                                                                 <div class="col">
-                                                                    <a href="<?= base_url("pic/Clistbar/detailBar/") . $lok->kodebar; ?>" class="btn btn-sm btn-info">Detail</a>
+                                                                    <a href="<?= base_url("pic/Clistbar/detailBar/") . $bar->kodebar; ?>" class="btn btn-sm btn-info">Detail</a>
                                                                 </div>
                                                             </div>
-
-
-
 
                                                         </td>
                                                     </tr>
@@ -152,6 +157,8 @@
 
                 <?php if ($page == "formUpdate") {
                 ?>
+
+
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-outline card-info">
@@ -342,7 +349,7 @@
                                                     <div class="col">
 
                                                         <label class=" ">Ruangan/Penempatan </label>
-                                                        <select name="ruangan" id="ruangan" class="form-control">
+                                                        <select name="ruangan" id="ruangan" class="form-control select2">
                                                             <option value="">.:Pilih Ruangan :.</option>
                                                             <?php foreach ($ruangs as $key => $ruang) { ?>
 
@@ -408,7 +415,8 @@
                                             </div>
 
 
-                                            <?= (count($gbrs) == 0) ? "Belum Ada Gambar yang di-Upload" : "";; ?>
+                                            <?= (count($gbrs) == 0) ? "Belum Ada Gambar yang di-Upload" : ""; ?>
+
                                             <div class="row">
 
 
@@ -478,6 +486,12 @@
     <!-- Bootstrap 4 -->
     <script src="<?= base_url("assets/") ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+
+
+    <!-- Select2 -->
+    <script src="<?= base_url("assets/") ?>plugins/select2/js/select2.full.min.js"></script>
+
+
     <!-- AdminLTE App -->
     <!-- <script src="<?= base_url("assets/") ?>dist/js/adminlte.min.js"></script> -->
     <script src="<?= base_url("assets/") ?>plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
@@ -485,6 +499,11 @@
     <!-- AdminLTE for demo purposes -->
     <script>
         $(document).ready(function() {
+
+
+            $('.select2').select2()
+
+
             $('.btn_cari_by_barcode').click(function() {
                 kodebar = $('.kodebar').val();
                 $.get('<?= base_url('pic/UpdateBar/retrieveData'); ?>' + kodebar, function(data) {

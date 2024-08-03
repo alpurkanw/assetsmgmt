@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.admin/css/ionicons.min.css"> -->
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="<?= base_url("assets/") ?>dist/css/adminlte.min.css">
+
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- DataTables -->
@@ -22,6 +21,15 @@
 
     <!-- daterange picker -->
     <link rel="stylesheet" href="<?= base_url("assets/") ?>datepick/css/bootstrap-datepicker.min.css">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>dist/css/adminlte.min.css">
+
+
 
 
 </head>
@@ -68,7 +76,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label text-right">Ruangan </label>
                                             <div class="col-sm-8" id="list_ruang">
-                                                <select name="ruang" class="form-control">
+                                                <select name="ruang" class="form-control select2">
                                                     <option value="0">.:Pilih Ruangan :.</option>
                                                 </select>
                                             </div>
@@ -250,8 +258,16 @@
     <script src="<?= base_url("assets/") ?>plugins/buttons.print.min.js"></script>
 
 
+
+    <!-- Select2 -->
+    <script src="<?= base_url("assets/") ?>plugins/select2/js/select2.full.min.js"></script>
+
+
+
     <script>
         $(document).ready(function() {
+
+
 
             $(".btn_print").on("click", function() {
                 // $("#mdl_pickupBar .idbar").val($(this).data("id"));
@@ -292,6 +308,10 @@
                 $.get('<?= base_url('admin/Cactivity/ambilRuang/'); ?>' + lokasi.id, function(data) {
                     // alert('Data : ' + data);
                     $('#list_ruang').html(data);
+
+                    // console.log($('#list_ruang .select2')); // Periksa apakah elemen ditemukan
+
+                    $('#list_ruang .select2').select2()
                     // $('.kodebar').val('');
                     // $('.kodebar').focus();
 

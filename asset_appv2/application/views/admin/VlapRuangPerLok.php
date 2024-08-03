@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.admin/css/ionicons.min.css"> -->
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="<?= base_url("assets/") ?>dist/css/adminlte.min.css">
+
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- DataTables -->
@@ -22,6 +21,16 @@
 
     <!-- daterange picker -->
     <link rel="stylesheet" href="<?= base_url("assets/") ?>datepick/css/bootstrap-datepicker.min.css">
+
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="<?= base_url("assets/") ?>dist/css/adminlte.min.css">
+
+
 
 
 </head>
@@ -194,9 +203,15 @@
     <script src="<?= base_url("assets/") ?>plugins/buttons.html5.min.js"></script>
     <script src="<?= base_url("assets/") ?>plugins/buttons.print.min.js"></script>
 
+    <!-- Select2 -->
+    <script src="<?= base_url("assets/") ?>plugins/select2/js/select2.full.min.js"></script>
+
+
 
     <script>
         $(document).ready(function() {
+
+
 
             // $('.btn_export').click(function() {
 
@@ -261,6 +276,9 @@
                 $.get('<?= base_url('admin/ClapRuangPerLok/ambilRuang/'); ?>' + lokasi.id, function(data) {
                     // alert('Data : ' + data);
                     $('#list_ruang').html(data);
+
+                    $('#list_ruang .select2').select2()
+
                     // $('.kodebar').val('');
                     // $('.kodebar').focus();
 

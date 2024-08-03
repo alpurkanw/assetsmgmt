@@ -39,7 +39,7 @@ class ClapRuangPerLok extends CI_Controller
 
         // $this->db->get_where('tbl_ruangan', ["idlok" => $id]);
         // $ruangs = $this->db->order_by('idruang', 'DESC')->result();
-        echo '<select name="ruang" class="form-control">
+        echo '<select name="ruang" class="form-control select2">
                 <option value="0">.:Pilih Ruangan :.</option>';
         foreach ($ruangs as $key => $rng) {
             echo "<option value='" . json_encode($rng) . "'>" . $rng->namaruang . "</option>";
