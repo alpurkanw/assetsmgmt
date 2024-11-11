@@ -1,6 +1,0 @@
-Cara instalasi
-- Buka excel terlebih dahulu, 
-- Cek apakah sudah ada atau belum font dengan nama "IDAutomationHC39M Free Version" 
-- Jika belum maka silahkan double klik file HC39M.ttf 
-- Klik tombol instal dan tunggu.
-- dan silahkan buka file "pembuatan barcode.xlsx" atau silahkan sesuaikan barcode anda 

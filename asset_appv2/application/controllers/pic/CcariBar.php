@@ -20,11 +20,11 @@ class CcariBar extends CI_Controller
 
         $this->load->view('pic/VcariFormParm', $data);
     }
-    
+
     public function barCode()
     {
         $data["judul"] = "Scan barang";
-        
+
         // $this->load->view('pic/VcariFormParm', $data);
         $this->load->view('pic/VbarCode', $data);
     }
@@ -143,7 +143,7 @@ class CcariBar extends CI_Controller
                                     </h5>
                                     </div>
                                     <div class="col text-right">
-                                        <a class="btn  btn-info" href="' . base_url("pic/Clistbar/detailBar/") .$brg[0]->kodebar. '">Detail</a>
+                                        <a class="btn  btn-info" href="' . base_url("pic/Clistbar/detailBar/") . $brg[0]->kodebar . '">Detail</a>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@ class CcariBar extends CI_Controller
                                         Kode Aset
                                     </div>
                                     <div class="col-auto">
-                        ' . $brg[0]->kode_aset .'-'.$brg[0]->no_reg_aset .'
+                        ' . $brg[0]->kode_aset . '-' . $brg[0]->no_reg_aset . '
                                     </div>
                                 </div>
                                 
@@ -358,13 +358,13 @@ class CcariBar extends CI_Controller
 
 
 
-
-
     public function CariBynameSubmit()
     {
-        // print_r($_POST);
-        // return;
+
+
         $nameLike = $this->input->post("keyWordCari");
+        // print_r($nameLike);
+        // return;
         $data["judul"] = "List Barang";
         $data["show"] = "listBar";
         $data["brgs"] = $this->bar->barByName($nameLike)->result();
@@ -384,11 +384,16 @@ class CcariBar extends CI_Controller
     {
         // print_r($_POST);
         // return;
-        $idkateg = $this->input->post("kateg");
+        $idkateg =  $this->input->post("kateg");
+        // $idkateg =  $this->input->post("kateg");
         $data["judul"] = "List Barang";
         $data["show"] = "listBar";
-
+        $data["kateg"] = $this->db->get_where("tbl_kateg", ["idkat" => $this->input->post("kateg")])->result();
+        // print_r($data["kateg"]);
+        // echo $this->input->post("kateg");
+        // return;
         $data["brgs"] = $this->bar->barBykateg($idkateg)->result();
+
 
         $this->load->view('pic/Vlistbar', $data);
     }

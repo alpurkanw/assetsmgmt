@@ -105,11 +105,11 @@
                                         <div class="col">
 
                                             <h6>List Barang</h6>
-                                            <h6>Ruangan : <?= $bars[0]->ruang; ?></h6>
-                                            <?= $ruang["id"]; ?>
+                                            <h6>Ruangan : <?= $ruang["id"]; ?> - <?= $bars[0]->ruang; ?></h6>
+
                                         </div>
                                         <div class="col">
-                                            <a class="btn btn-sm btn-info float-right" href="<?= base_url('admin/Cactivity/showDetail/showDetailAllitemPerRuang/') . $ruang["id"] . "/" . $lokasi["id"]; ?>" target="_blank">PRINT SEMUA</a>
+                                            <a class="btn btn-sm btn-info float-right" href="<?= base_url('admin/Cactivity/showDetailAllitemPerRuang/') . $ruang["id"] . "/" . $lokasi["id"]; ?>" target="_blank">PRINT SEMUA</a>
                                         </div>
                                     </div>
 

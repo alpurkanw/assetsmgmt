@@ -20,14 +20,13 @@ class Clistbar extends CI_Controller
         $userlok = $_SESSION["lokid"];
 
         $sql = " SELECT A.*, B.id, B.namakateg from tbl_barang A left join tbl_kateg B on B.id = A.idkateg
-        where idlok = $userlok  ";
+        where idlok = $userlok and a.harga <> 0 ";
         // echo $sql;
         // return;
         $data["brgs"] =  $this->db->query($sql)->result();
         // print_r($data["brgs"]);
         // return;
 
-        // $data["brgs"] = $this->db->get_where('tbl_barang', ["idlok" => $userlok])->result();
 
         $this->load->view('mkr/Vlistbar', $data);
     }
@@ -38,7 +37,7 @@ class Clistbar extends CI_Controller
         $data["judul"] = "Barcode Create";
         $data["id"] = $id;
 
-        // $data["brgs"] = $this->db->get_where('tbl_barang', ["idlok" => $userlok])->result();
+
 
         $this->load->view('mkr/Vbarcode', $data);
     }

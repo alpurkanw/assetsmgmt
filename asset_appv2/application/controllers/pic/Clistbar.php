@@ -19,7 +19,7 @@ class Clistbar extends CI_Controller
 
     public function detailBar($id)
     {
-        /// $data["brgs"] = $this->db->get_where('tbl_barang', ["idlok" => $userlok])->result();
+
         $data["judul"] = "Detail Barang";
         $data["show"] = "detailBar";
 
@@ -43,6 +43,8 @@ class Clistbar extends CI_Controller
     public function updBar($kodebar)
     {
 
+        // print_r($_POST);
+        // return;
 
         $ruang = json_decode($this->input->post('ruangan'), TRUE);
         $kondisi = $this->input->post('kondisi');
@@ -51,6 +53,19 @@ class Clistbar extends CI_Controller
         $idruang = $ruang["id"];
         $namaruang = $ruang["namaruang"];
 
+        $merkbar = $this->input->post('merkbar');
+        $namabar = $this->input->post('namabar');
+        $no_seri = $this->input->post('no_seri');
+        $no_mesin = $this->input->post('no_mesin');
+        $no_rangka = $this->input->post('no_rangka');
+        $no_bpkb = $this->input->post('no_bpkb');
+        $no_platlama = $this->input->post('no_platlama');
+        $no_platbaru = $this->input->post('no_platbaru');
+        $jns_per = $this->input->post('jns_per');
+        $tgl_kalibrasi = $this->input->post('tgl_kalibrasi');
+        $no_platbaru = $this->input->post('no_platbaru');
+
+        // Array ( [merkbar] => TOYOTA AVANZA / 1300G GMMFJJ [namabar] => Mini Bus ( Penumpang 14 Orang Kebawah ) [no_seri] => [no_mesin] => DE40102 [no_rangka] => MHFM1B379K171057 [no_bpkb] => 8670938F [no_platlama] => BN 2075 CZ [no_platbaru] => BN-1510-TZ [jns_per] => 1 [tgl_kalibrasi] => [from] => fcariByName [ruangan] => {"id":"11","idlok":"1","namaruang":"RUANG KABAG TATA USAHA","desk":"2"} [kondisi] => BAIK [katakunci] => 000009 [thn_angg] => [desk] => RSUD )
 
 
         $data_sebelum_update = $this->bar->barPerBarcode($kodebar)->result_array();
@@ -60,11 +75,25 @@ class Clistbar extends CI_Controller
             'kodebar' => $kodebar,
         ];
 
+
+
         $data_update = [
             'idruang' => $idruang,
             'ruang' => $namaruang,
             'kondisi' => $kondisi,
-            'ket' => $ket
+            'ket' => $ket,
+            'merkbar' => $merkbar,
+            'namabar' => $namabar,
+            'no_seri' => $no_seri,
+            'no_mesin' => $no_mesin,
+            'no_rangka' => $no_rangka,
+            'no_bpkb' => $no_bpkb,
+            'no_platlama' => $no_platlama,
+            'no_platbaru' => $no_platbaru,
+            'jns_per' => $jns_per,
+            'tgl_kalibrasi' => $tgl_kalibrasi,
+            'no_platbaru' => $no_platbaru
+
 
         ];
         $this->db->where($where);
@@ -103,7 +132,15 @@ class Clistbar extends CI_Controller
                 'kata',
                 $this->input->post('kata')
             );
-            $redir = base_url('pic/UpdateBar/retrieveDatabySession/');
+
+            print_r($_POST);
+            return;
+            if ($_SESSION["katakunci"] <> "") {
+                $redir = base_url('pic/UpdateBar/retrieveDatabySession/');
+            } else {
+                $redir = base_url('pic/UpdateBar/retrieveDatabySessionthn_angg/');
+            }
+
             redirect($redir);
         }
         if ($this->db->affected_rows() == 0) {
@@ -137,8 +174,6 @@ class Clistbar extends CI_Controller
 
         $data["judul"] = "Barcode Create";
         $data["id"] = $id;
-
-        // $data["brgs"] = $this->db->get_where('tbl_barang', ["idlok" => $userlok])->result();
 
         $this->load->view('mkr/Vbarcode', $data);
     }

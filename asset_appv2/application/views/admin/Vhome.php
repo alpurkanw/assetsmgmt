@@ -39,16 +39,49 @@
 
 
                 <div class="row">
-                    <div class="col">
-                        <div class="card card-info card-outline">
-                            <div class="card-header">
-                                <h3 class="card-title"></h3>
-                            </div> <!-- /.card-body -->
-                            <div class="card-body">
-                                <p class="h3">Selamat Datang <?= $_SESSION["nama"]; ?></p>
-                            </div><!-- /.card-body -->
-                        </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h5 class="">Daftar Peringatan</h5>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Jenis Peringatan</th>
+                                                <th class="text-right">Jumlah Aset/Barang Jatuh Tempo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($pers as $key => $per) {
+                                            ?>
 
+                                                <tr>
+                                                    <td><?= $no; ?></td>
+                                                    <td><?= $per->jenis_peringatan; ?></td>
+                                                    <td class="text-right"><span class="btn btn-sm btn-danger">Delivered</span></td>
+
+                                                </tr>
+
+
+                                            <?php
+                                                $no++;
+                                            }; ?>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>

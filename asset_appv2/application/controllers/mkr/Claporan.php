@@ -15,7 +15,7 @@ class Claporan  extends CI_Controller
 
     public function index()
     {
-        $data["judul"] = "Input barang";
+        $data["judul"] = "Laporan Input Barang";
         $userlok = $_SESSION["lokid"];
         $data["page"] = "index";
         $data["tgl1"] = date('Y-m-d');
@@ -40,7 +40,7 @@ class Claporan  extends CI_Controller
 
         // return;
         $sql = " SELECT A.*, B.id, B.namakateg from tbl_barang A left join tbl_kateg B on B.id = A.idkateg
-                where indat between $tgl1 and $tgl2 and userin = $userin and idlok = $userlok  ";
+                where indat between $tgl1 and $tgl2 and userin = $userin and idlok = $userlok  and a.harga <> 0  ";
         // echo $sql;
         // return;
         $data["brgs"] =  $this->db->query($sql)->result();

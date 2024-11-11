@@ -60,15 +60,31 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url("pic/ClapRuangPerLok") ?>" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            KIR Barang Per Ruangan
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="<?= base_url("pic/UpdateBar/getParm") ?>" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Update Barang
+                            Upd Barang
                         </p>
                     </a>
                 </li>
+                <!-- <li class="nav-item">
+                    <a href="<?= base_url("pic/UpdateBar_byThnAngg/getParmthn") ?>" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Upd Barang Per Thn Angg
+                        </p>
+                    </a>
+                </li> -->
 
 
                 <hr>

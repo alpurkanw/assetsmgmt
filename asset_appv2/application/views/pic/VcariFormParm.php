@@ -69,8 +69,8 @@
                                             <div class="col-10">
                                                 <input type="text" class="form-control" name="keyWordCari" placeholder="Masukan Nama Barang" autofocus>
                                             </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-info btn_cari_by_name">Cari</button>
+                                            <div class="col">
+                                                <button class="btn btn-info btn-block btn_cari_by_name">Cari</button>
                                             </div>
                                         </div>
 
@@ -78,6 +78,8 @@
 
 
                                 </div>
+
+
                                 <!-- /.card-body -->
                             </div>
                         </div>
@@ -107,12 +109,12 @@
                                                     <option value="">.:Pilih Kategori :.</option>
                                                     <?php foreach ($ktgs as $key => $ktg) { ?>
 
-                                                        <option value='<?= $ktg->id; ?>'><?= $ktg->namakateg; ?></option>
+                                                        <option value='<?= $ktg->idkat; ?>'><?= $ktg->idkat . " - " . $ktg->namakateg; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-info btn_cari_by_name">Cari</button>
+                                            <div class="col">
+                                                <button class="btn btn-info btn-block btn_cari_by_name">Cari</button>
                                             </div>
                                         </div>
 

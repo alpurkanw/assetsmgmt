@@ -37,7 +37,7 @@
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-lg-10 col-md-10 col-sm-12 ">
                         <div class="card card-outline card-info">
 
                             <!-- /.card-header -->
@@ -51,10 +51,10 @@
                             <div class="card-body p-2">
                                 <div class="row">
 
-                                    <div class="col-8">
+                                    <div class="col-10">
                                         <input type="text" class="form-control kodebar" name="kodebar" placeholder="Silahkan Scan Barcode..." autofocus>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col">
                                         <button class="btn btn-info btn-block  btn_cari_by_barcode">Cari</button>
                                     </div>
                                 </div>

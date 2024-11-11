@@ -107,6 +107,8 @@
                                 <div class="card-body p-2">
                                     <!-- <button class="btn btn-info btn_export">tes</button> -->
                                     <div class="tes_data">
+
+
                                         <table id="list_lap_bar" class="table table-sm table-bordered table-striped  " role="grid" aria-describedby="example1_info">
                                             <thead>
                                                 <tr role="row">

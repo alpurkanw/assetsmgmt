@@ -1,2 +1,0 @@
-SELECT a.kodebar, kode_aset,no_reg_aset, thn_angg, namabar, ruang, harga, thn_angg, file_name FROM `tbl_barang` a
-LEFT JOIN tbl_gambar b on b.kodebar = a.kodebar

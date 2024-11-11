@@ -85,38 +85,52 @@
                                             </div>
                                         </div>
 
-                                        <table id="list_lap_bar" class="table table-sm text-sm table-bordered table-striped my-2  " role="grid" aria-describedby="example1_info">
+                                        <table id="list_bar" class="table table-sm table-bordered table-striped  ">
                                             <thead>
                                                 <tr role="row">
                                                     <th>No</th>
-                                                    <th>Kode Barang</th>
-                                                    <th>Kode Aset-No Register</th>
-                                                    <th>Merk Barang / Nama Barang</th>
-                                                    <th>Kategori</th>
+                                                    <th></th>
+                                                    <th>Nama Barang / Merk Barang / Kode Barang / Kategori</th>
                                                     <th>Tahun Anggaran</th>
                                                     <th>Asal Perolehan</th>
+                                                    <th>Ruangan</th>
                                                     <th>Harga</th>
                                                     <th>Kondisi</th>
-                                                    <th>Ketarangan</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
+
                                                 $no = 1;
-                                                foreach ($bars as $key => $lok) {
+                                                foreach ($bars as $key => $bar) {
 
                                                 ?>
                                                     <tr role="row" class="odd">
                                                         <td><?= $no; ?></td>
-                                                        <td><?= $lok->kodebar; ?></td>
-                                                        <td><?= $lok->kode_aset . "-" . $lok->no_reg_aset; ?></td>
-                                                        <td><?= $lok->merkbar; ?> / <?= $lok->namabar; ?></td>
-                                                        <td><?= $lok->namakateg; ?></td>
-                                                        <td><?= $lok->thn_angg; ?></td>
-                                                        <td><?= $lok->asal_peroleh; ?></td>
-                                                        <td>Rp <?= number_format($lok->harga, 2); ?></td>
-                                                        <td><?= $lok->kondisi; ?></td>
-                                                        <td><?= $lok->ket; ?></td>
+                                                        <td>
+                                                            <?php
+                                                            if ($bar->gambar !== null) { ?>
+                                                                <img class="img img-size-50" src="<?= base_url("assets/image/img_bar/") . $bar->gambar; ?>" height="100" width="100" alt=""><br>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td class="text-sm">
+                                                            <strong><?= $bar->namabar; ?></strong> <br>
+                                                            <?php
+                                                            echo $bar->merkbar . "<br>";
+                                                            echo $bar->kodebar . "<br>";
+                                                            echo $bar->namakateg;
+                                                            ?>
+                                                        </td>
+                                                        <td><?= $bar->thn_angg; ?></td>
+                                                        <td><?= $bar->asal_peroleh; ?></td>
+                                                        <td><?= $bar->ruang; ?></td>
+
+                                                        <td>Rp <?= number_format($bar->harga, 2); ?></td>
+                                                        <td><?= $bar->kondisi; ?></td>
+                                                        <td>
+                                                            <a href="<?= base_url("pic/Clistbar/detailBar/") . $bar->kodebar; ?>" class="btn btn-sm btn-info">Detail</a>
+                                                        </td>
                                                     </tr>
                                                 <?php
                                                     $no++;
@@ -125,6 +139,9 @@
                                             </tbody>
 
                                         </table>
+
+
+
 
                                         <div class="row">
                                             <div class="col">

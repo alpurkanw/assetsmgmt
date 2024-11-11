@@ -122,6 +122,42 @@
 
                                         </div>
 
+                                        <div class="row">
+                                            <div class=" col-lg-3 col-sm-12 ">
+                                                <!-- small box -->
+                                                <div class="small-box bg-info">
+                                                    <div class="inner">
+                                                        <h4><strong><?= $jumgambar[0]->ada_gambar; ?></strong></h4>
+                                                        <!-- <?php print_r($jumgambar); ?> -->
+                                                        <p>Total barang ADA GAMBAR</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-pie-graph"></i>
+                                                    </div>
+                                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- ./col -->
+                                            <div class=" col-lg-3 col-sm-12">
+                                                <!-- small box -->
+                                                <div class="small-box bg-info">
+                                                    <div class="inner">
+                                                        <h4 class="text-left"><strong><?= number_format($jumgambar[0]->persentase_gambar, 2); ?> %</strong>
+                                                        </h4>
+
+                                                        <p>Persentase Barang ADA GAMBAR</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-stats-bars"></i>
+                                                    </div>
+                                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
 
 
                                     </div>
@@ -275,52 +311,16 @@
 
                                 </div>
 
+
+
                                 <div class="row">
-
                                     <div class="col">
-
-                                        <h5>Lokasi barang</h5>
-                                        <table id="list_user" class="table table-sm table-bordered table-striped  " role="grid" aria-describedby="example1_info">
-                                            <thead class="bg-info">
-                                                <tr role="row">
-                                                    <th>Lokasi</th>
-                                                    <th>Jumlah</th>
-                                                    <th>Nominal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $jumnom = 0;
-                                                $jumitem = 0;
-                                                foreach ($lokasi as $key => $lok) {
-                                                ?>
-                                                    <tr role="row" class="odd">
-                                                        <td><?= $lok->namalok; ?></td>
-                                                        <td class="text-center"><?= $lok->jumitem; ?></td>
-                                                        <td class="text-right">Rp <?= number_format($lok->nominal, 2); ?></td>
-                                                    </tr>
-                                                <?php
-                                                    $jumnom += $lok->nominal;
-                                                    $jumitem += $lok->jumitem;
-                                                }; ?>
-                                                <tr>
-                                                    <th>TOTAL</th>
-                                                    <th class="text-center"><?= $jumitem; ?></th>
-                                                    <th class="text-right">Rp <?= number_format($jumnom, 2); ?></th>
-                                                </tr>
-
-                                            </tbody>
-
-                                        </table>
-                                        <hr>
-
-
-                                        <h5>Barang Per Lokasi Per Ruangan</h5>
+                                        <h5>REKAP BARANG PERUANGAN</h5>
 
                                         <table id="list_user" class="table table-sm table-bordered table-striped  " role="grid" aria-describedby="example1_info">
                                             <thead class="bg-info">
                                                 <tr role="row">
-                                                    <th>Lokasi</th>
+                                                    <th>ID Ruangan</th>
                                                     <th>Ruangan</th>
                                                     <th class="text-center">Jumlah</th>
                                                     <th>Nominal</th>
@@ -333,7 +333,7 @@
                                                 foreach ($ruang as $key => $lok) {
                                                 ?>
                                                     <tr role="row" class="odd">
-                                                        <td><?= $lok->idlok; ?></td>
+                                                        <td><?= $lok->idruang; ?></td>
                                                         <td><?= $lok->ruang; ?></td>
                                                         <td class="text-center"><?= $lok->jumitem; ?></td>
                                                         <td>Rp <?= number_format($lok->nominal, 2); ?></td>
@@ -352,10 +352,53 @@
                                             </tbody>
 
                                         </table>
-                                        <hr>
                                     </div>
+                                    <div class="col">
+                                        <h5>Barang Per Kategori</h5>
 
+                                        <table id="list_user" class="table table-sm table-bordered table-striped  " role="grid" aria-describedby="example1_info">
+                                            <thead class="bg-info">
+                                                <tr role="row">
+                                                    <th>No</th>
+                                                    <th>Jenis Kategori</th>
+                                                    <th class="text-center">Jumlah</th>
+                                                    <th>Nominal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $no = 1;
+                                                $jumnom = 0;
+                                                $jumitem = 0;
+                                                foreach ($kategs as $key => $ktg) {
+                                                ?>
+                                                    <tr role="row" class="odd">
+                                                        <td><?= $no; ?></td>
+                                                        <td><?= $ktg->idkateg . " - " . $ktg->namakateg; ?></td>
+                                                        <td class="text-center"><?= $ktg->jumitem; ?></td>
+                                                        <td>Rp <?= number_format($ktg->nominal, 2); ?></td>
+                                                    </tr>
+                                                <?php
+                                                    $no++;
+                                                    $jumnom += $ktg->nominal;
+                                                    $jumitem += $ktg->jumitem;
+                                                }; ?>
+                                                <tr>
+                                                    <th colspan="2">TOTAL</th>
+                                                    <th class="text-center"><?= $jumitem; ?></th>
+                                                    <th class="text-right">Rp <?= number_format($jumnom, 2); ?></th>
+                                                </tr>
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
                                 </div>
+
+
+
+
 
                             </div><!-- /.card-body -->
                         </div>

@@ -38,23 +38,13 @@ class Claporan  extends CI_Controller
         $tgl1 = str_replace("-", "", $this->input->post("tgl1"));
         $tgl2 = str_replace("-", "", $this->input->post("tgl2"));
 
-        // echo $userlok;
-        // return;
-        // echo "SELECT * from tbl_barang where indat between $tgl1 and $tgl2 and userin = $userin and idlok = $userlok";
-        // return;
+
         $sql = " SELECT A.*, B.id, B.namakateg from tbl_barang A left join tbl_kateg B on B.id = A.idkateg
-                where indat between $tgl1 and $tgl2 and userin = $userin and idlok = $userlok  ";
+                where indat between $tgl1 and $tgl2 and userin = $userin and idlok = $userlok and A.harga <> 0 ";
         // echo $sql;
         // return;
         $data["brgs"] =  $this->db->query($sql)->result();
-        // print_r($data["brgs"]);
-        // return;
 
-        // $data["brgs"] = $this->db->get_where('tbl_barang', $where)->result();
-
-
-        // $data["ktgs"] = $this->db->get('tbl_kateg')->result();
-        // $data["loks"] = $this->db->get('tbl_lok')->result();
         $this->load->view('mkr/Vlaporan', $data);
     }
 }

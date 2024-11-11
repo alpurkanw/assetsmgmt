@@ -1,8 +1,0 @@
-update form input barang ok
-DROP down ruangan ok
-drop down asal perolehan ok
-
-kode barang urutan saja ok
-
-
-form untuk ubah password

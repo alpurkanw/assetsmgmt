@@ -44,6 +44,98 @@
 
             <!-- Main content -->
             <section class="content">
+                <?php if ($show == "responsethn_angg") {
+                ?>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-outline card-info">
+                                <div class="card-header p-1">
+                                    <h4>List Barang Tahun Anggaran <?= $brgs[0]->thn_angg; ?></h4>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body p-2">
+                                    <!-- <button class="btn btn-info btn_export">tes</button> -->
+                                    <div class="tes_data">
+
+
+
+                                        <table id="list_bar" class="table table-sm table-bordered table-striped table-responsive ">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th>No</th>
+                                                    <th>Foto</th>
+                                                    <th>Nama Barang / <br>Merk Barang / <br>Kode Barang </th>
+                                                    <th>Kategori</th>
+                                                    <th>Asal Perolehan</th>
+                                                    <th>Ruangan</th>
+                                                    <th>Harga</th>
+                                                    <th>Kondisi</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+
+                                                $no = 1;
+                                                foreach ($brgs as $key => $bar) {
+
+                                                ?>
+                                                    <tr role="row" class="odd">
+                                                        <td><?= $no; ?></td>
+                                                        <td>
+                                                            <?php
+                                                            if ($bar->file_name !== null) { ?>
+                                                                <img class="img img-size-50" src="<?= base_url("assets/image/img_bar/") . $bar->file_name; ?>" height="100" width="100" alt=""><br>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td class="text-sm">
+                                                            <strong><?= $bar->namabar; ?></strong> <br>
+                                                            <?php
+                                                            echo $bar->merkbar . "<br>";
+                                                            echo $bar->kodebar;
+                                                            ?>
+                                                        </td>
+                                                        <td><?= $bar->namakateg; ?></td>
+                                                        <td><?= $bar->asal_peroleh; ?></td>
+                                                        <td><?= $bar->ruang; ?></td>
+
+                                                        <td>Rp <?= number_format($bar->harga, 2); ?></td>
+                                                        <td><?= $bar->kondisi; ?></td>
+
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col mb-2">
+                                                                    <form action=" <?= base_url("pic/UpdateBar/updBarOpenForm/"); ?>" method="post">
+                                                                        <input type="hidden" name="kodebar" value="<?= $bar->kodebar; ?>">
+                                                                        <input type="hidden" name="thn_angg" value="<?= (isset($_SESSION["thn_angg"])) ? $_SESSION["thn_angg"] : ""; ?>">
+                                                                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <a href="<?= base_url("pic/Clistbar/detailBar/") . $bar->kodebar; ?>" class="btn btn-sm btn-info">Detail</a>
+                                                                </div>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                    $no++;
+                                                }; ?>
+
+                                            </tbody>
+
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+
+                    </div>
+                <?php } ?>
+
 
                 <?php if ($show == "listBar") { ?>
                     <div class="row">
@@ -52,9 +144,13 @@
                                 <div class="card-header p-1">
                                     <div class="row">
                                         <div class="col">
-                                            <h5>List Barang </h5>
-                                        </div>
+                                            <h5>Daftar Barang </h5>
 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.card-header -->
@@ -64,15 +160,13 @@
                                         <thead>
                                             <tr role="row">
                                                 <th>No</th>
-                                                <th>Nama Barang</th>
-                                                <th>Kategori</th>
-                                                <th>Kode Barang</th>
-                                                <th>Merk Barang</th>
+                                                <th></th>
+                                                <th>Nama Barang / Merk Barang / Kode Barang / Kategori</th>
                                                 <th>Tahun Anggaran</th>
                                                 <th>Asal Perolehan</th>
                                                 <th>Ruangan</th>
                                                 <th>Harga</th>
-                                                <th>Status</th>
+                                                <th>Kondisi</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -85,21 +179,26 @@
                                             ?>
                                                 <tr role="row" class="odd">
                                                     <td><?= $no; ?></td>
-                                                    <td><?= $brg->namabar; ?></td>
-                                                    <td><?= $brg->namakateg; ?></td>
-                                                    <td><?= $brg->kodebar; ?></td>
-                                                    <td><?= $brg->merkbar; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        if ($brg->gambar !== null) { ?>
+                                                            <img class="img img-size-50" src="<?= base_url("assets/image/img_bar/") . $brg->gambar; ?>" height="100" width="100" alt=""><br>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <td class="text-sm">
+                                                        <strong><?= $brg->namabar; ?></strong> <br>
+                                                        <?php
+                                                        echo $brg->merkbar . "<br>";
+                                                        echo $brg->kodebar . "<br>";
+                                                        echo $brg->namakateg;
+                                                        ?>
+                                                    </td>
                                                     <td><?= $brg->thn_angg; ?></td>
                                                     <td><?= $brg->asal_peroleh; ?></td>
                                                     <td><?= $brg->ruang; ?></td>
+
                                                     <td>Rp <?= number_format($brg->harga, 2); ?></td>
-                                                    <td>
-                                                        <?php if ($brg->sts == "1") { ?>
-                                                            <span class="badge badge-warning">Approved</span>
-                                                        <?php } else { ?>
-                                                            <span class="badge badge-danger">Not Approved</span>
-                                                        <?php } ?>
-                                                    </td>
+                                                    <td><?= $brg->kondisi; ?></td>
                                                     <td>
                                                         <a href="<?= base_url("pic/Clistbar/detailBar/") . $brg->kodebar; ?>" class="btn btn-sm btn-info">Detail</a>
                                                     </td>

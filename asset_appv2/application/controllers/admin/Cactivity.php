@@ -80,7 +80,7 @@ class Cactivity extends CI_Controller
                                     Pilih Ruangan Terlebih Dahulu
                                 </div>'
                 );
-                redirect(base_url("admin/Cactivity"));
+                redirect("admin/Cactivity");
             }
         } else {
             $this->session->set_flashdata(
@@ -89,7 +89,7 @@ class Cactivity extends CI_Controller
                                 Pilih Ruangan Terlebih Dahulu
                             </div>'
             );
-            redirect(base_url("admin/Cactivity"));
+            redirect("admin/Cactivity");
         }
     }
 
@@ -120,28 +120,28 @@ class Cactivity extends CI_Controller
     {
         /// $data["brgs"] = $this->db->get_where('tbl_barang', ["idlok" => $userlok])->result();
         $data["judul"] = "Detail Barang";
-        $data["show"] = "detailBar";
+        $data["show"] = "showdata";
 
+        // print_r($ruang);
+        // return;
         // $data["brg"] = $this->bar->barPerBarcode($id)->result();
 
-        $userlok = $_SESSION["lokid"];
+        // $userlok = $_SESSION["lokid"];
 
-        // $data["ruangs"] = $this->db->get_where('tbl_ruangan', array("idlok" => $userlok))->result();
+        // $data["ruangs"] = $this->db->get_where('tbl_ruangan', array("idlok" => $ruang))->result();
         // $data["gbrs"] = $this->db->get_where('tbl_gambar', array("kodebar" => $id))->result();
 
-        // $this->db->select('*');
-        // $this->db->from('history_upd');
-        // $this->db->where('kode', $id);
-        // $this->db->order_by('tgl, jam', 'DESC');
-        // $data["hstrs"] = $this->db->get()->result();
+        $data["ruang"] = $ruang;
+        $data["lokasi"] = $lokasi;
+
 
         $sql = "SELECT A.id aid, A.*, B.id, B.namakateg, C.namalok namalok from tbl_barang A 
         left join tbl_kateg B on B.id = A.idkateg
         left join tbl_lok C on C.id = A.idlok
-        where 
-        idlok = $lokasi and idruang = $ruang";
-        $data["gbrs"] = $this->db->query($sql);
-
+        where idlok = $lokasi and idruang = $ruang";
+        $data["bars"] = $this->db->query($sql)->result();
+        // print_r($data["gbrs"]);
+        // return;
 
         // $data["hstrs"] = $this->db->get_where('history_upd', ["kode" => $id])->result();
 

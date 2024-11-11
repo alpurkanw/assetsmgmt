@@ -18,7 +18,8 @@ class Clistbar extends CI_Controller
         $data["show"] = "listAll";
 
 
-        $sql = " SELECT A.id aid,A.*, B.id, B.namakateg from tbl_barang A left join tbl_kateg B on B.id = A.idkateg";
+        $sql = " SELECT A.id aid,A.*, B.id, B.namakateg from tbl_barang A left join tbl_kateg B on B.id = A.idkateg where 
+        A.harga <> 0";
 
         $data["brgs"] =  $this->db->query($sql)->result();
 
@@ -32,7 +33,7 @@ class Clistbar extends CI_Controller
         $data["show"] = "listNotApp";
 
         $sql = " SELECT A.id aid,A.*, B.id, B.namakateg from tbl_barang A left join tbl_kateg B on B.id = A.idkateg
-        where sts  = 0  ";
+        where sts  = 0 and A.harga <> 0 ";
 
         $data["brgs"] =  $this->db->query($sql)->result();
 
@@ -48,7 +49,7 @@ class Clistbar extends CI_Controller
         $sql = " SELECT A.id aid, A.*, B.id, B.namakateg, C.namalok namalok from tbl_barang A 
         left join tbl_kateg B on B.id = A.idkateg
         left join tbl_lok C on C.id = A.idlok
-        where A.id  = $id  ";
+        where A.id  = $id  and A.harga <> 0 ";
 
         $data["brgs"] =  $this->db->query($sql)->result();
 

@@ -95,7 +95,7 @@ class Ckateg extends CI_Controller
         $data["show"] = "f_update";
 
         $data["ktg"] = $this->db->get_where('tbl_kateg', ["id" => $id])->result();
-        $this->load->view('admin/VKateg', $data);
+        $this->load->view('admin/Vkateg', $data);
     }
 
     public function updProc($id)

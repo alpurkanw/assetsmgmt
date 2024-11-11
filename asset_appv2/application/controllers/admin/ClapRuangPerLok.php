@@ -64,11 +64,17 @@ class ClapRuangPerLok extends CI_Controller
                 $lokasi = json_decode($this->input->post('lokasi'), TRUE);
                 $ruang = json_decode($this->input->post('ruang'), TRUE);
 
-                $sql = " SELECT A.*, B.id, B.namakateg from tbl_barang A left join tbl_kateg B on B.id = A.idkateg
-                 where idlok = '" . $lokasi["id"] . "' and idruang = '" . $ruang["id"] . "' ";
+                $sql = " SELECT A.*, C.file_name as gambar from tbl_barang A 
+                left join tbl_kateg B on B.id = A.idkateg
+                LEFT JOIN tbl_gambar C on C.kodebar = A.kodebar
+                 where A.idlok = '" . $lokasi["id"] . "' and A.idruang = '" . $ruang["id"] . "' ";
                 // // echo $sql;
                 // // return;
                 $data["bars"] =  $this->db->query($sql)->result();
+                // print_r($data["bars"]);
+                // return;
+
+
                 $data["lokasi"] = $lokasi;
                 $data["ruang"] = $ruang;
 
